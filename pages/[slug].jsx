@@ -1,11 +1,11 @@
 import Link from 'next/link'
+import { API_URL } from '../utils/config'
 //this is the page for receiving domain/key requests
 //it makes an api call in getServerSideProps so that it happens pre-render
 //that api will return us the relevant long url
-
 export async function getServerSideProps(context) {
   const key = context.params.slug
-  const response = await fetch(`http://localhost:3000/api/check/${key}`).then(res => res.json())
+  const response = await fetch(`${API_URL}/api/check/${key}`).then(res => res.json())
   const { longUrl } = response
 
   if (longUrl) {

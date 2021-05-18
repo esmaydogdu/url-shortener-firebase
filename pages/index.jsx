@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState } from 'react';
+import { API_URL } from '../utils/config';
 
 export default function Home() {
   const [inputText, setInputText] = useState('')
   const [shortUrl, setShortUrl] = useState('')
+
 
   const handleChange = (e) => {
     setInputText(e.target.value)
@@ -17,8 +19,9 @@ export default function Home() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ longUrl: inputText })
     }
-    const response = await fetch(`http://localhost:3000/api/shorten`, options).then(res => res.json())
-    setShortUrl(`http://localhost:3000/${response.key}`)
+   
+      const response = await fetch(`${API_URL}/api/shorten`, options).then(res => res.json())
+    setShortUrl(`${API_URL}/${response.key}`)
     }
   }
   return (
